@@ -18,12 +18,9 @@ $(document).ready(function() {
   //   $('#putHere').text("clicked");
   // });
 
+  //Event Listeners
   $('#submitButton').on('click', GetData);
-
-
-  // $('.inputs').append('<button id="playAgain">Play again!</button>');
-
-
+  $('#dataTableBody').on('click', '.deleteButton', RemoveRow);
 }); // End document ready
 
 function AddText() {
@@ -61,14 +58,29 @@ function GetData() {
 
   console.log(employeeDataArray);
 
-  //Clear out all the input cells
+  //Clear out all the input cells for bot text and number type in the input class
   //$('.inputs').val('');
   //$('#firstName').val('');
-  $('.inputs input[type="text"]').val('');
+  $('.inputs input[type="text"], input[type="number"]').val('');
 
   //Calculate the monthly costs
   totalMonthlyCost += salary / 12;
   //Add the total monthly cost to the DOM
-  $("#totalMonthlyCost").text("Total Monthly Cost with all employees: " + Math.round(totalMonthlyCost));
-  console.log(totalMonthlyCost);
+  $("#totalMonthlyCost").text("Total Monthly Cost with all employees: $" + Math.round(totalMonthlyCost));
+
+  //Add employee data to the DOM
+  // $('.inputs').append('<button id="playAgain">Play again!</button>');
+  var $row = $('<tr>');
+  $row.append('<td>' + firstName + '</td>');
+  $row.append('<td>' + lastName + '</td>');
+  $row.append('<td>' + idNumber + '</td>');
+  $row.append('<td>' + jobTitle + '</td>');
+  $row.append('<td>' + salary + '</td>');
+  $row.append('<td><button class="deleteButton">Delete</button></td>');
+  $('#dataTableBody').append($row);
 } // END: GetData
+
+//delete row -   $('#cohortTableBody').on('click', '.delete' , deleteCohortRow);
+function RemoveRow() {
+  console.log('delete click');
+} // END: RemoveRow

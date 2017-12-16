@@ -15,11 +15,8 @@
       <header>
         <h1 align="center">Employee Data Form</h1>
       </header>
-      <div>
-        <h4 id="totalMonthlyCost"></h4>
-      </div>
       <div class="inputs">
-        <h5>Enter data in the boxes below:</h5>
+        <h4>Enter data in the boxes below:</h4>
         <input type="text" id="firstName" placeholder="First Name">
         <input type="text" id="lastName" placeholder="Last Name">
         <input type="number" id="idNumber" placeholder="idNumber">
@@ -27,11 +24,13 @@
         <input type="number" id="salary" placeholder="Salary">
         <button type="button" id="submitButton">Submit</button>
       </div>
-
+      <div>
+        <h3 id="totalMonthlyCost">Total Monthly Cost with all employees: $0</h3>
+      </div>
 <div>
-  <h3>Entered Employee Data:</h3>
+  <h4>Entered Employee Data:</h4>
 
-      <table>
+      <table class="center">
         <thead>
           <tr id="rowNames">
             <th>First Name</th>
@@ -43,11 +42,6 @@
         </thead>
         <tbody id="dataTableBody">
           <tr id="outputDataRows">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr>
 
