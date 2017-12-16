@@ -1,0 +1,19 @@
+
+
+header {
+  border: 1px #000 solid;
+  padding: 3px;
+  margin: 3px;
+}
+
+.inputs{
+  border: 1px #000 solid;
+  padding: 3px;
+  margin: 3px;
+}
+/*table, table headers and table data borders and styles*/
+table, th, td {
+  border: 1px #000 solid;
+  padding: 3px;
+  margin: 3px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Salary Calculator</title>
+    <script src="jquery.min.js" charset="utf-8"></script>
+    <script src="scripts.js" charset="utf-8"></script>
+    <link href='styles.css' rel='stylesheet' type='text/css'/>
+  </head>
+  <!-- ///*** employee first name, last name, ID number, job title, annual salary. -->
+
+  <div id="container">
+
+    <body>
+      <header>
+        <h1 align="center">Employee Data Form</h1>
+      </header>
+
+      <div class="inputs">
+        <h5>Enter data in the boxes below:</h5>
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
+        <input type="text" id="idNumber" placeholder="idNumber">
+        <input type="text" id="jobTitle" placeholder="Job Title">
+        <input type="text" id="salary" placeholder="Salary">
+        <button type="button" id="submitButton">Submit</button>
+      </div>
+
+<div>
+  <h3>Entered Employee Data:</h3>
+
+      <table>
+        <thead>
+          <tr id="rowNames">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>ID Number</th>
+            <th>Job Title</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tbody id="dataTableBody">
+          <tr id="outputDataRows">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+
+          </tr>
+        </tbody>
+      </table>
+    </body>
+  </div>
+
+</html>
