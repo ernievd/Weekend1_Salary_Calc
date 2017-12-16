@@ -38,26 +38,37 @@ class Employee {
     this.idNum=id;
     this.jobTitle=title;
     this.annualSalary=salary;
+    //Calulate the employees salary right in the constructor
+    this.monthlyCost=salary / 12;
   }//end constructor
 }//end class
 
-//create a global array to store all employee data objects
+//Create a global array to store all employee data objects
 var employeeDataArray = [];
+//Create a global to store the total monthly cost
+var totalMonthlyCost = 0;
+
+//Create a function to get all input data, store it in the employeeDataArray
+//    and clear out all input boxes
 function GetData() {
   var firstName = $('#firstName').val();
   var lastName = $('#lastName').val();
   var idNumber = $('#idNumber').val();
   var jobTitle = $('#jobTitle').val();
   var salary = $('#salary').val();
-  // add it to the array
+  //Add it to the array
   employeeDataArray.push(new Employee(firstName,lastName,idNumber,jobTitle,salary));
 
-  //  var firstName = $('#firstName').val;
   console.log(employeeDataArray);
 
-  //clear out all the input cells
-  //$('.inputs').val(''); //clearing out all the input field
-  $('.inputs input[type="text"]').val('');
+  //Clear out all the input cells
+  //$('.inputs').val('');
   //$('#firstName').val('');
+  $('.inputs input[type="text"]').val('');
 
+  //Calculate the monthly costs
+  totalMonthlyCost += salary / 12;
+  //Add the total monthly cost to the DOM
+  $("#totalMonthlyCost").text("Total Monthly Cost with all employees: " + Math.round(totalMonthlyCost));
+  console.log(totalMonthlyCost);
 } // END: GetData
