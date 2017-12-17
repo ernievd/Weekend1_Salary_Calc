@@ -13,13 +13,13 @@ class Employee {
     this.idNum=id;
     this.jobTitle=title;
     this.annualSalary=salary;
-    //Calulate the employees salary right in the constructor
+    //Calulate the employees monthly salary right in the constructor
     this.monthlyCost=salary / 12;
   }//end constructor
 }//end class
 
 $(document).ready(function() {
-  console.log('jquery ready');
+  //console.log('jquery ready');
 
   //** Some submit button examples below
   //$('#submitButton').on('click', getUserInput, compareNumbers);
@@ -44,6 +44,7 @@ $(document).ready(function() {
 
 }); // End document ready
 
+  //Created Main to use for better code flow control
  function Main() {
    var onTrue = CheckForEmpty();
    if (onTrue === true){
@@ -56,7 +57,11 @@ $(document).ready(function() {
 
 //Check for empty fields
 function CheckForEmpty() {
-  if ( ($('#firstName').val() != '') && ($('#lastName').val() != '') && ($('#idNumber').val() != '') && ($('#jobTitle').val() != '') && ($('#salary').val() != '')  ){
+  if ( ($('#firstName').val() != '') &&
+   ($('#lastName').val() != '') &&
+    ($('#idNumber').val() != '') &&
+     ($('#jobTitle').val() != '') &&
+      ($('#salary').val() != '')  ){
     //console.log("not empty");
     return true;
   }
@@ -118,7 +123,7 @@ function RemoveRow() {
   var currentRow=$(this).closest("tr");
   var removedSalary=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
   removedSalary = removedSalary / 12;
-  console.log('removed salary is :' + removedSalary);
+  //console.log('removed salary is :' + removedSalary);
   totalMonthlyCost = totalMonthlyCost - removedSalary;
   $('#totalMonthlyCost').text(monthlyCostMessage + Math.round(totalMonthlyCost));
   //Below are examples to stop at the tr tag and then delete everything in it
