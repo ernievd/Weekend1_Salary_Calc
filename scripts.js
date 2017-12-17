@@ -19,14 +19,9 @@ $(document).ready(function() {
   // });
 
   //Event Listeners
-  $('#submitButton').on('click', GetData);
+  $('#submitButton').on('click', AddData);
   $('#dataTableBody').on('click', '.deleteButton', RemoveRow);
 }); // End document ready
-
-function AddText() {
-  console.log('AddText clicked');
-  $('#putHere').text('changed!!');
-} // END: AddText
 
 class Employee {
   constructor(first,last,id,title,salary){
@@ -47,18 +42,19 @@ var totalMonthlyCost = 0;
 
 //Create a function to get all input data, store it in the employeeDataArray
 //    and clear out all input boxes
-function GetData() {
+function AddData() {
   var firstName = $('#firstName').val();
   var lastName = $('#lastName').val();
   var idNumber = $('#idNumber').val();
   var jobTitle = $('#jobTitle').val();
   var salary = $('#salary').val();
-  //Add it to the array
+  //$('div').data("")
+
+  //Add data to the array
   employeeDataArray.push(new Employee(firstName,lastName,idNumber,jobTitle,salary));
 
-  console.log(employeeDataArray);
-
-  //Clear out all the input cells for bot text and number type in the input class
+  //Clear out all the input cells for both text and number type in the input class
+  //   Sets there value to blank  - ''
   //$('.inputs').val('');
   //$('#firstName').val('');
   $('.inputs input[type="text"], input[type="number"]').val('');
@@ -82,11 +78,30 @@ function GetData() {
 
 //delete row -   $('#cohortTableBody').on('click', '.delete' , deleteCohortRow);
 function RemoveRow() {
+
+  //This will find the values in all the current rows that are on the same line as the delete button (this)
+  // var currentRow=$(this).closest("tr");
+  // var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
+  // var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
+  // var col3=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
+  // var col4=currentRow.find("td:eq(3)").text(); // get current row 4rd TD
+  // var col5=currentRow.find("td:eq(4)").text(); // get current row 5rd TD
+  // var data=col1+"\n"+col2+"\n"+col3+"\n"+col4+"\n"+col5;
+  //alert(data);
+
+  //Get the value of the about to be delted employee and subtract it from the totalMonthlyCost
+  var currentRow=$(this).closest("tr");
+  var removedSalary=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
+  removedSalary = removedSalary / 12;
+  console.log('removed salary is :' + removedSalary);
+  totalMonthlyCost = totalMonthlyCost - removedSalary;
+  $("#totalMonthlyCost").text("Total Monthly Cost with all employees: $" + Math.round(totalMonthlyCost));
+
+  //Below are examples to stop at the tr tag and then delete everything in it
+       // parents does the same
   //$(this).parent().parent().remove();
   //or
   //$(this).parents('tr').remove();
   //or
   $(this).closest('tr').remove();
-  //above states to stop at the tr tag and then delete everything in it
-      // parents does the same
-} // END: RemoveRow
+} // END: RemoveRow()
