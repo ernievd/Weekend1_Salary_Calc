@@ -82,5 +82,11 @@ function GetData() {
 
 //delete row -   $('#cohortTableBody').on('click', '.delete' , deleteCohortRow);
 function RemoveRow() {
-  console.log('delete click');
+  //$(this).parent().parent().remove();
+  //or
+  //$(this).parents('tr').remove();
+  //or
+  $(this).closest('tr').remove();
+  //above states to stop at the tr tag and then delete everything in it
+      // parents does the same
 } // END: RemoveRow
