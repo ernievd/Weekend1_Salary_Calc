@@ -1,27 +1,10 @@
-console.log('js sourced');
 
-///////The application should have an input form that collects
-///*** employee first name, last name, ID number, job title, annual salary.
-//var randomNumber = getRandomNumber();
-
-$(document).ready(function() {
-  console.log('jquery ready');
-  //$('#submitButton').on('click', getUserInput, compareNumbers);
-  //$('#submitButton').on('click', AddText);
-
-  // $('#submitButton').on('click',function(){
-  //   $('#putHere').text('changed!');
-  // });
-
-  //$('#submitButton').click(AddText);
-  // $('#submitButton').click(function() {
-  //   $('#putHere').text("clicked");
-  // });
-
-  //Event Listeners
-  $('#submitButton').on('click', AddData);
-  $('#dataTableBody').on('click', '.deleteButton', RemoveRow);
-}); // End document ready
+//Create a global array to store all employee data objects
+var employeeDataArray = [];
+//Create a global to store the total monthly cost
+var totalMonthlyCost = 0;
+//Create a global to store the default total monthly message (so we dont have to keep typing it)
+var monthlyCostMessage = "Total Monthly Cost of All Current Employees: $";
 
 class Employee {
   constructor(first,last,id,title,salary){
@@ -35,10 +18,53 @@ class Employee {
   }//end constructor
 }//end class
 
-//Create a global array to store all employee data objects
-var employeeDataArray = [];
-//Create a global to store the total monthly cost
-var totalMonthlyCost = 0;
+$(document).ready(function() {
+  console.log('jquery ready');
+
+  //** Some submit button examples below
+  //$('#submitButton').on('click', getUserInput, compareNumbers);
+  //$('#submitButton').on('click', AddText);
+
+  // $('#submitButton').on('click',function(){
+  //   $('#putHere').text('changed!');
+  // });
+
+  //$('#submitButton').click(AddText);
+  // $('#submitButton').click(function() {
+  //   $('#putHere').text("clicked");
+  // });
+
+  //Add default monthlyCostMessage
+  $('#totalMonthlyCost').text(monthlyCostMessage + totalMonthlyCost)
+
+  //Event Listeners
+  //$('#submitButton').on('click', AddData);
+  $('#submitButton').on('click', Main);
+  $('#dataTableBody').on('click', '.deleteButton', RemoveRow);
+
+}); // End document ready
+
+ function Main() {
+   var onTrue = CheckForEmpty();
+   if (onTrue === true){
+     AddData();
+   }
+   else{
+     alert('All fields are not filled in. Please complete all fields to continue. ');
+   }
+ } // END: Main
+
+//Check for empty fields
+function CheckForEmpty() {
+  if ( ($('#firstName').val() != '') && ($('#lastName').val() != '') && ($('#idNumber').val() != '') && ($('#jobTitle').val() != '') && ($('#salary').val() != '')  ){
+    //console.log("not empty");
+    return true;
+  }
+  else {
+    //console.log("empty cell found!");
+    return false;
+  }
+} // END: CheckForEmpty
 
 //Create a function to get all input data, store it in the employeeDataArray
 //    and clear out all input boxes
@@ -54,7 +80,7 @@ function AddData() {
   employeeDataArray.push(new Employee(firstName,lastName,idNumber,jobTitle,salary));
 
   //Clear out all the input cells for both text and number type in the input class
-  //   Sets there value to blank  - ''
+  //   Sets the value to blank  - ''
   //$('.inputs').val('');
   //$('#firstName').val('');
   $('.inputs input[type="text"], input[type="number"]').val('');
@@ -62,8 +88,7 @@ function AddData() {
   //Calculate the monthly costs
   totalMonthlyCost += salary / 12;
   //Add the total monthly cost to the DOM
-  $("#totalMonthlyCost").text("Total Monthly Cost with all employees: $" + Math.round(totalMonthlyCost));
-
+  $('#totalMonthlyCost').text(monthlyCostMessage + Math.round(totalMonthlyCost));
   //Add employee data to the DOM
   // $('.inputs').append('<button id="playAgain">Play again!</button>');
   var $row = $('<tr>');
@@ -89,16 +114,15 @@ function RemoveRow() {
   // var data=col1+"\n"+col2+"\n"+col3+"\n"+col4+"\n"+col5;
   //alert(data);
 
-  //Get the value of the about to be delted employee and subtract it from the totalMonthlyCost
+  //Get the salary value of the to be deleted employee and subtract it from the totalMonthlyCost
   var currentRow=$(this).closest("tr");
   var removedSalary=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
   removedSalary = removedSalary / 12;
   console.log('removed salary is :' + removedSalary);
   totalMonthlyCost = totalMonthlyCost - removedSalary;
-  $("#totalMonthlyCost").text("Total Monthly Cost with all employees: $" + Math.round(totalMonthlyCost));
-
+  $('#totalMonthlyCost').text(monthlyCostMessage + Math.round(totalMonthlyCost));
   //Below are examples to stop at the tr tag and then delete everything in it
-       // parents does the same
+       // .parents does the same
   //$(this).parent().parent().remove();
   //or
   //$(this).parents('tr').remove();
